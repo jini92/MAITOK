@@ -1,0 +1,9 @@
+{
+  "project": "MAITOK",
+  "type": "web-service",
+  "platform": "railway",
+  "env_required": ["DATABASE_URL", "TIKTOK_API_KEY"],
+  "pre_deploy": ["pnpm build", "pnpm test"],
+  "post_deploy": ["health-check"],
+  "url": "https://maitok.up.railway.app"
+}
