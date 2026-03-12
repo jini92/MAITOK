@@ -59,3 +59,21 @@ MAITOK/
 - `docs/D001-architecture.md` — 시스템 아키텍처
 - `docs/D002-detailed-design.md` — 상세 설계
 - `docs/I002-development-plan.md` — 개발 계획
+
+## ⚠️ Regression Guard
+
+Critical settings are protected by guard tests. Run before/after any algorithm change:
+```
+npx vitest run tests/regression-guard.test.ts
+```
+
+| Setting | Value | Reason |
+|---------|-------|--------|
+| LLM_MODEL | `claude-sonnet-4-6` | Default AI model for sentiment analysis and replies |
+| LLM_MAX_TOKENS | `256` | Token limit; too low truncates, too high wastes budget |
+| TIKTOK_DAILY_LIMIT | `1000` | Research API daily quota; exceeding = 24h lockout |
+| POLLING_INTERVALS | `2min/5min/30min` | Adaptive schedule; balances freshness vs API quota |
+| SERVER_PORT | `3000` | Fastify server port; deployment config depends on this |
+| TIKTOK_API_BASE | `open.tiktokapis.com` | Official TikTok API endpoint |
+
+See `benchmarks/baseline.json` for full benchmark history.

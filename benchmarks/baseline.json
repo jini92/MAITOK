@@ -1,0 +1,47 @@
+﻿{
+  "project": "MAITOK",
+  "generated": "2026-03-12",
+  "description": "TikTok AI comment analysis and auto-reply (Tikly)",
+  "critical_settings": {
+    "LLM_MODEL_DEFAULT": {
+      "value": "claude-sonnet-4-6",
+      "source": "src/ai/pipeline.ts",
+      "reason": "Default AI model for sentiment analysis and reply generation"
+    },
+    "LLM_MAX_TOKENS": {
+      "value": 256,
+      "source": "src/ai/pipeline.ts",
+      "reason": "Token limit for AI responses; too low truncates output, too high wastes budget"
+    },
+    "TIKTOK_DAILY_LIMIT": {
+      "value": 1000,
+      "source": "src/tiktok/client.ts",
+      "reason": "TikTok Research API daily quota; exceeding causes 24h lockout"
+    },
+    "POLLING_INTERVAL_NEW_MS": {
+      "value": 120000,
+      "source": "src/poller/scheduler.ts",
+      "reason": "2min polling for new videos (<24h); too frequent risks rate limit"
+    },
+    "POLLING_INTERVAL_DEFAULT_MS": {
+      "value": 300000,
+      "source": "src/poller/scheduler.ts",
+      "reason": "5min default polling interval; balances freshness vs API quota"
+    },
+    "POLLING_INTERVAL_OLD_MS": {
+      "value": 1800000,
+      "source": "src/poller/scheduler.ts",
+      "reason": "30min for old videos (>7d); preserves API quota"
+    },
+    "SERVER_PORT": {
+      "value": 3000,
+      "source": "src/index.ts",
+      "reason": "Fastify server port; deployment config depends on this"
+    },
+    "TIKTOK_API_BASE_URL": {
+      "value": "https://open.tiktokapis.com",
+      "source": "src/tiktok/client.ts",
+      "reason": "TikTok API base URL; must point to official API"
+    }
+  }
+}
